@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle 1</title>
+    <link rel="stylesheet" href="/puzzle1.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="text-4xl font-semibold text-pink-600 mb-4">
+        💌 Valentine Puzzle 💌
+      </h1>
+      <p class="text-lg text-gray-700 mb-6">Answer the questions below:</p>
+
+      <form method="POST" id="unlockForm">
+        <!-- This value matches what Flask expects -->
+        <input type="hidden" name="answer" value="coffee" />
+
+        <div class="question" id="q1">
+          <h2 class="text-2xl font-semibold text-pink-500">
+            1. Your first Valentine's gift to me had ____ on it?
+          </h2>
+          <div class="answer">
+            <input
+              type="text"
+              name="q1"
+              placeholder="Type your answer here..."
+              required
+            />
+          </div>
+        </div>
+
+        <div class="question" id="q2">
+          <h2 class="text-2xl font-semibold text-pink-500">
+            2. When was the first time you saw me in person?
+          </h2>
+          <div class="answer">
+            <input type="text" name="q2" placeholder="Feb 14 2026" required />
+            <small style="display: block; color: #555; margin-top: 8px">
+              Format: Feb 14 2026
+            </small>
+          </div>
+        </div>
+
+        <div class="question" data-question="q3" data-correct="b">
+          <h2 class="text-2xl font-semibold text-pink-500">
+            3. What did I wear on our first date?
+          </h2>
+
+          <ul
+            class="options"
+            style="
+              list-style: none;
+              padding: 0;
+              max-width: 400px;
+              margin: 0 auto;
+            "
+          >
+            <li class="option" data-value="a">A) A red dress</li>
+            <li class="option" data-value="b">B) Jeans and a pink top</li>
+            <li class="option" data-value="c">
+              C) A black top and black pants
+            </li>
+            <li class="option" data-value="d">D) Free hair</li>
+          </ul>
+
+          <!-- Hidden input stays for your existing logic -->
+          <input
+            type="text"
+            name="q3"
+            style="position: absolute; left: -9999px"
+          />
+        </div>
+
+        <div class="question" data-question="q4" data-correct="b">
+          <h2 class="text-2xl font-semibold text-pink-500">
+            4. When did I turn into curly girl?
+          </h2>
+
+          <ul
+            class="options"
+            style="
+              list-style: none;
+              padding: 0;
+              max-width: 400px;
+              margin: 0 auto;
+            "
+          >
+            <li class="option" data-value="a">A) July, 2023</li>
+            <li class="option" data-value="b">B) Nov, 2023</li>
+            <li class="option" data-value="c">C) Dec, 2022</li>
+            <li class="option" data-value="d">D) Jan 2024</li>
+          </ul>
+
+          <!-- Hidden input stays for your existing logic -->
+          <input
+            type="text"
+            name="q4"
+            style="position: absolute; left: -9999px"
+          />
+        </div>
+        <p
+          id="successMsg"
+          style="
+            display: none;
+            font-size: 20px;
+            color: #e63946;
+            margin-bottom: 15px;
+          "
+        >
+          💖 Yayy, you got it all right 💖
+        </p>
+        <p
+          id="noteMsg"
+          style="
+            display: none;
+            font-size: 20px;
+            color: #040404;
+            margin-bottom: 15px;
+          "
+        >P.S. Remember your answers, you'll
+          need them later😉
+        </p>
+
+        <button type="submit" id="submitBtn">See what's next</button>
+      </form>
+    </div>
+
+    <script>
+      // for handling the text input questions
+      const lightGreenAnswers = ["14 diamonds", "14diamonds"];
+      const lightYellowAnswers = [
+        "ring",
+        "14",
+        "diamond ring",
+        "diamond",
+        "diamonds",
+      ];
+
+      const correctAnswers = {
+        q2: ["dec 4 2020"],
+      };
+
+      function normalize(value) {
+        return value.trim().toLowerCase().replace(/\s+/g, " ");
+      }
+
+      function validateQ1(value, container) {
+        const input = container.querySelector("input");
+        const v = normalize(input.value);
+
+        input.classList.remove("correct", "wrong", "hint");
+        // input.style.background = "";
+
+        if (lightGreenAnswers.includes(v)) {
+          input.classList.add("correct");
+          return true;
+        }
+
+        if (lightYellowAnswers.includes(v)) {
+          input.classList.add("hint");
+          return false;
+        }
+
+        if (v.length > 0) {
+          input.classList.add("wrong");
+        }
+
+        return false;
+      }
+
+      function validateQ2(value, container) {
+        const input = container.querySelector("input");
+        const v = normalize(input.value);
+        input.classList.remove("correct", "wrong");
+
+        if (correctAnswers.q2.includes(v)) {
+          input.classList.add("correct");
+          return true;
+        }
+
+        if (v.length > 0) {
+          input.classList.add("wrong");
+        }
+
+        return false;
+      }
+
+      function checkAllCorrect() {
+        const totalCorrect = document.querySelectorAll(
+          "li.option.correct,input.correct",
+        ).length;
+        const msg = document.getElementById("successMsg");
+        const note = document.getElementById("noteMsg");
+        if (totalCorrect === 4) {
+          msg.style.display = "block";
+          note.style.display = "block";
+        } else {
+          msg.style.display = "none";
+          note.style.display = "none";
+        }
+      }
+
+      // Attach listeners
+      document
+        .querySelector('input[name="q1"]')
+        .addEventListener("input", (e) => {
+          const container = document.getElementById("q1");
+          validateQ1(e.target.value, container);
+          checkAllCorrect();
+        });
+
+      document
+        .querySelector('input[name="q2"]')
+        .addEventListener("input", (e) => {
+          const container = document.getElementById("q2");
+          validateQ2(e.target.value, container);
+          checkAllCorrect();
+        });
+    </script>
+
+    <script>
+      // for handling the multiple choice questions
+      document.querySelectorAll(".question").forEach((question) => {
+        const correctAnswer = question.dataset.correct;
+        const inputName = question.dataset.question;
+        const hiddenInput = question.querySelector(
+          `input[name="${inputName}"]`,
+        );
+
+        question.querySelectorAll(".option").forEach((option) => {
+          option.setAttribute("tabindex", "0");
+          option.setAttribute("role", "button");
+
+          option.addEventListener("click", () => {
+            // reset
+            question.querySelectorAll(".option").forEach((o) => {
+              o.classList.remove("correct", "wrong");
+            });
+
+            const chosen = option.dataset.value;
+            hiddenInput.value = chosen;
+
+            if (chosen === correctAnswer) {
+              option.classList.add("correct");
+            } else {
+              option.classList.add("wrong");
+            }
+            checkAllCorrect();
+          });
+
+          option.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              option.click();
+              e.preventDefault();
+            }
+            checkAllCorrect();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

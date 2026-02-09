@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle 1</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 100px;
+      }
+
+      #heart {
+        font-size: 80px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      #heart:active {
+        transform: scale(1.2);
+      }
+
+      #message {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("https://plus.unsplash.com/premium_photo-1670850875280-3dfd998b10e7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dmFsZW50aW5lcyUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .container {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .question {
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #333;
+      }
+
+      .answer {
+        margin-bottom: 30px;
+      }
+
+      .answer input {
+        padding: 10px;
+        width: 100%;
+        max-width: 400px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      #submitBtn {
+        background-color: #e63946;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #submitBtn:hover {
+        background-color: #d62839;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-4xl font-semibold text-pink-600 mb-4">
+        💌 Valentine Puzzle 💌
+      </h1>
+      <p class="text-lg text-gray-700 mb-6">Answer the questions below:</p>
+
+      <form method="POST" id="unlockForm">
+        <!-- This value matches what Flask expects -->
+        <input type="hidden" name="answer" value="coffee" />
+
+        <div class="question">
+          <h2 class="text-2xl font-semibold text-pink-500">
+            1. Your first Valentine's gift to me had ____ on it?
+          </h2>
+          <div class="answer">
+            <input
+              type="text"
+              name="q1"
+              placeholder="Type your answer here..."
+              required
+            />
+          </div>
+        </div>
+
+        <div class="question">
+          <h2 class="text-2xl font-semibold text-pink-500">
+            2. When was the first time you saw me in person?
+          </h2>
+          <div class="answer">
+            <input
+              type="text"
+              name="q2"
+              placeholder="Mar 08, 2020"
+              pattern="^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{1,2},\s\d{4}$"
+              title="Expected format: Dec 4, 2020"
+              aria-describedby="q2-format"
+              required
+            />
+            <small id="q2-format" style="display:block;color:#555;margin-top:8px;">
+              Format: Mon DD, YYYY (e.g., Mar 08, 2020)
+            </small>
+          </div>
+        </div>
+
+        <div class="question">
+          <h2 class="text-2xl font-semibold text-pink-500">
+            3. What did I wear on our first date?
+          </h2>
+          <div class="answer"></div>
+            <ul style="list-style:none;padding:0;max-width:400px;margin:0 auto;">
+              <li role="button" tabindex="0"
+            style="padding:10px;border:1px solid #ccc;border-radius:5px;margin-bottom:8px;cursor:pointer;text-align:left;"
+            onclick="document.querySelector('input[name=\'q3\']').value='a'; this.parentNode.querySelectorAll('li').forEach(li=>li.style.background=''); this.style.background='lightgreen';"
+            onkeydown="if(event.key==='Enter'||event.key===' '){ this.click(); event.preventDefault(); }">
+          A) A red dress
+              </li>
+              <li role="button" tabindex="0"
+            style="padding:10px;border:1px solid #ccc;border-radius:5px;margin-bottom:8px;cursor:pointer;text-align:left;"
+            onclick="document.querySelector('input[name=\'q3\']').value='b'; this.parentNode.querySelectorAll('li').forEach(li=>li.style.background=''); this.style.background='lightgreen';"
+            onkeydown="if(event.key==='Enter'||event.key===' '){ this.click(); event.preventDefault(); }">
+          B) Jeans and a pink top
+              </li>
+              <li role="button" tabindex="0"
+            style="padding:10px;border:1px solid #ccc;border-radius:5px;margin-bottom:8px;cursor:pointer;text-align:left;"
+            onclick="document.querySelector('input[name=\'q3\']').value='c'; this.parentNode.querySelectorAll('li').forEach(li=>li.style.background=''); this.style.background='lightgreen';"
+            onkeydown="if(event.key==='Enter'||event.key===' '){ this.click(); event.preventDefault(); }">
+          C) A black top and black pants
+              </li>
+              <li role="button" tabindex="0"
+            style="padding:10px;border:1px solid #ccc;border-radius:5px;margin-bottom:8px;cursor:pointer;text-align:left;"
+            onclick="document.querySelector('input[name=\'q3\']').value='d'; this.parentNode.querySelectorAll('li').forEach(li=>li.style.background=''); this.style.background='lightgreen';"
+            onkeydown="if(event.key==='Enter'||event.key===' '){ this.click(); event.preventDefault(); }">
+          D) free hair
+              </li>
+            </ul>
+
+            <!-- hidden text input used by existing validation logic -->
+            <input type="text" name="q3" value="" style="position:absolute;left:-9999px;" />
+          </div>
+          <div class="question">
+          <h2 class="text-2xl font-semibold text-pink-500">
+            4. When did I turn into curly girl?
+          </h2>
+          <div class="answer">
+            <ul style="list-style:none;padding:0;max-width:400px;margin:0 auto;">
+              <li role="button" tabindex="0"
+            style="padding:10px;border:1px solid #ccc;border-radius:5px;margin-bottom:8px;cursor:pointer;text-align:left;"
+            onclick="document.querySelector('input[name=\'q4\']').value='a'; this.parentNode.querySelectorAll('li').forEach(li=>li.style.background=''); this.style.background='lightgreen';"
+            onkeydown="if(event.key==='Enter'||event.key===' '){ this.click(); event.preventDefault(); }">
+          A) July, 2023
+              </li>
+              <li role="button" tabindex="0"
+            style="padding:10px;border:1px solid #ccc;border-radius:5px;margin-bottom:8px;cursor:pointer;text-align:left;"
+            onclick="document.querySelector('input[name=\'q4\']').value='b'; this.parentNode.querySelectorAll('li').forEach(li=>li.style.background=''); this.style.background='lightgreen';"
+            onkeydown="if(event.key==='Enter'||event.key===' '){ this.click(); event.preventDefault(); }">
+          B) Nov, 2023
+              </li>
+              <li role="button" tabindex="0"
+            style="padding:10px;border:1px solid #ccc;border-radius:5px;margin-bottom:8px;cursor:pointer;text-align:left;"
+            onclick="document.querySelector('input[name=\'q4\']').value='c'; this.parentNode.querySelectorAll('li').forEach(li=>li.style.background=''); this.style.background='lightgreen';"
+            onkeydown="if(event.key==='Enter'||event.key===' '){ this.click(); event.preventDefault(); }">
+          C) Dec, 2022
+              </li>
+              <li role="button" tabindex="0"
+            style="padding:10px;border:1px solid #ccc;border-radius:5px;margin-bottom:8px;cursor:pointer;text-align:left;"
+            onclick="document.querySelector('input[name=\'q4\']').value='d'; this.parentNode.querySelectorAll('li').forEach(li=>li.style.background=''); this.style.background='lightgreen';"
+            onkeydown="if(event.key==='Enter'||event.key===' '){ this.click(); event.preventDefault(); }">
+          D) Jan 2024
+              </li>
+            </ul>
+
+            <!-- hidden text input used by existing validation logic -->
+            <input type="text" name="q4" value="" style="position:absolute;left:-9999px;" />
+          </div>
+        </div> 
+        <button type="submit" id="submitBtn">Submit Answers</button>
+      </form>
+        </div>
+
+                       
+
+        
+
+    <script>
+      // Correct answers
+      const correctAnswers = {
+        q1: '14 diamonds',
+        q2: 'dec 04,2020',
+        q3: 'b',
+        q4: 'b'
+      };
+
+      // Function to validate answers
+      function validateAnswers() {
+        let score = 0;
+        const totalQuestions = 4;
+
+        // Question 1 validation
+        const q1Answer = document.querySelector('input[name="q1"]').value.trim().toLowerCase();
+        console.log('Q1 Answer:', q1Answer, 'Expected:', correctAnswers.q1); // Debugging log
+
+        // Define possible answers for each color
+        const lightGreenAnswers = ['14 diamonds', '14diamonds'];
+        const lightYellowAnswers = ['ring', '14', 'diamond ring', 'diamond', 'diamonds'];
+
+        if (lightGreenAnswers.includes(q1Answer)) {
+          score++;
+          document.querySelector('input[name="q1"]').style.backgroundColor = 'lightgreen';
+        } else if (lightYellowAnswers.includes(q1Answer)) {
+          document.querySelector('input[name="q1"]').style.backgroundColor = 'lightyellow';
+        } else {
+          document.querySelector('input[name="q1"]').style.backgroundColor = 'lightcoral';
+        }
+
+        // Question 2 validation
+        const q2Answer = document.querySelector('input[name="q2"]').value.trim().toLowerCase();
+        if (q2Answer === correctAnswers.q2.toLowerCase()) {
+          score++;
+          document.querySelector('input[name="q2"]').style.backgroundColor = 'lightgreen';
+        } else {
+          document.querySelector('input[name="q2"]').style.backgroundColor = 'lightcoral';
+        }
+
+        // Question 3 validation
+        const q3Answer = document.querySelector('input[name="q3"]').value.trim();
+        console.log('Q3 Answer:', q3Answer); // Debugging log
+        if (q3Answer === correctAnswers.q3) {
+          score++;
+          document.querySelector('input[name="q3"]').style.backgroundColor = 'lightgreen';
+        } else {
+          document.querySelector('input[name="q3"]').style.backgroundColor = 'lightcoral';
+        }
+
+        // Question 4 validation
+        const q4Answer = document.querySelector('input[name="q4"]').value.trim();
+        if (q4Answer === correctAnswers.q4) {
+          score++;
+          document.querySelector('input[name="q4"]').style.backgroundColor = 'lightgreen';
+        } else {
+          document.querySelector('input[name="q4"]').style.backgroundColor = 'lightcoral';
+        }
+
+        alert('Your score: ' + score + '/' + totalQuestions);
+        return score;
+      }
+
+      // Function to handle form submission
+      function handleSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        const score = validateAnswers(); // Call validateAnswers to update field colors
+        if (score === 4) {
+          window.location.href = '/puzzle2'; // Navigate to the next page
+        } else {
+          alert('Please answer all questions correctly.');
+        }
+      }
+
+      // Update to validate answers on input change and blur events
+      const answerInputs = document.querySelectorAll('input[type="text"]');
+
+      answerInputs.forEach(input => {
+        input.addEventListener('input', () => {
+          if (input.value.toLowerCase() === correctAnswers[input.name]) {
+            input.style.backgroundColor = 'lightgreen';
+          } else {
+            input.style.backgroundColor = ''; // Reset color if not correct
+          }
+        });
+
+        input.addEventListener('blur', () => {
+          if (input.value.toLowerCase() !== correctAnswers[input.name]) {
+            input.style.backgroundColor = 'lightcoral';
+          }
+        });
+      });
+
+      // Attach event listener to the form
+      document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', handleSubmit);
+      });
+    </script>
+  </body>
+</html>
