@@ -37,5 +37,9 @@ def final():
 def gift():
     return render_template('gift.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+import os
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # use Render's PORT, default 5000 locally
+    app.run(host="0.0.0.0", port=port, debug=True)
+
