@@ -1,31 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Puzzle 2</title>
-  <link rel="stylesheet" href="/puzzle2.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-  <h1>Puzzle 2 - Kiss the Leku! 💋</h1>
-  
-  <div id="wrapper">
-    <div id="timer">30</div>
-    <div id="score">0</div>
-    <div class="mole"></div>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <div id="overlay">
-  <div id="message"></div>
-  <button id="nextBtn" onclick="goNext()">Next</button>
-</div>
+    <!-- PWA Support -->
 
-  <audio id="clickSound">
-    <source src="/audio/mixkit-little-cute-kiss-2192.wav" type="audio/wav">
-  </audio>
-  <button id="restartBtn">Restart</button>
+    <link rel="manifest" href="/static/manifest.json" />
 
-  <script src="/puzzle2.js"></script>
-</body>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Valentine 💖" />
+
+    <link rel="apple-touch-icon" href="/images/icon.png" />
+
+    <title>Puzzle 2</title>
+    <link rel="stylesheet" href="/puzzle2.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Puzzle 2 - Kiss the Leku! 💋</h1>
+
+    <div id="wrapper">
+      <div id="timer">30</div>
+      <div id="score">0</div>
+      <div class="mole"></div>
+    </div>
+
+    <div id="overlay">
+      <div id="message"></div>
+      <button id="nextBtn" onclick="goNext()">Next</button>
+    </div>
+
+    <audio id="clickSound">
+      <source src="/audio/mixkit-little-cute-kiss-2192.wav" type="audio/wav" />
+    </audio>
+    <button id="restartBtn">Restart</button>
+
+    <script src="/puzzle2.js"></script>
+  </body>
 </html>

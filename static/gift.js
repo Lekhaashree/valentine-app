@@ -27,7 +27,7 @@ const riddles = [
     I’m where you find everything ready.
     You check on top of me to find something hot waiting for you,
     I'm sometimes used as a toolbox, but today I hold a clue 😌`,
-    answer: "kitchen counter"
+    answer: "kitchen island"
   }
 ];
 
