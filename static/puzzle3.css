@@ -64,7 +64,7 @@ body {
   transform-origin: 100% 0;
 }
 .shackle .inner {
-  background: #fff;
+  background: rgb(231, 51, 111);
   border-radius: 50%;
   top: 33.75px;
   left: 33.75px;
@@ -461,3 +461,12 @@ body {
   border: none;
   border-radius: 6px;
 }
+
+@media (max-width: 600px) {
+  .container {
+    transform: scale(1.4) translateY(-35px);
+    transform-origin: center;
+  }
+}
+
+

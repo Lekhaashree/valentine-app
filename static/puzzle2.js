@@ -5,22 +5,41 @@ var counter = setInterval(timer, 1000);
 setTimeout("pop()", 3000);
 
 function pop() {
-  var x = Math.random() * 500;
-  var y = Math.random() * 150;
-  $(".mole").css("opacity", 1);
-  $(".mole").css({
-    top: y,
-    left: x,
+  const wrapper = $("#wrapper");
+  const mole = $(".mole");
+
+  const wrapperWidth = wrapper.width();
+  const wrapperHeight = wrapper.height();
+
+  const moleWidth = mole.width();
+  const moleHeight = mole.height();
+
+  const x = Math.random() * (wrapperWidth - moleWidth);
+  const y = Math.random() * (wrapperHeight - moleHeight);
+
+  mole.css({
+    opacity: 1,
+    left: x + "px",
+    top: y + "px",
   });
-  setTimeout("pop()", Math.random() * 3000);
+
+  setTimeout(pop, Math.random() * 2000 + 800);
 }
 
-$(".mole").click(function () {
+///event listener to initialize the audio context on the first touch.
+document.body.addEventListener("touchstart", function initAudio() {
+    var audio = document.getElementById("clickSound");
+    audio.play().then(() => audio.pause());
+    document.body.removeEventListener("touchstart", initAudio);
+}, { once: true });
+
+
+$(".mole").on("click touchstart", function () {
   if (gameOver) return;
   var audio = document.getElementById("clickSound");
   if (audio) {
     audio.currentTime = 0;
-    audio.play().catch(function (e) {
+    audio.play().catch((e) => {
       console.log("Audio play failed:", e);
     });
   }

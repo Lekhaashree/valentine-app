@@ -1,8 +1,11 @@
 .mole {
   background-image: url(./images/e6e2c1f7-7675-4109-be77-7e374ec15710.webp);
   background-repeat: no-repeat;
-  width: 260px;
-  height: 320px;
+  
+  width: 35vw;
+  max-width: 260px;
+  aspect-ratio: 4 / 5;
+  height: auto;
 
   background-size: contain;
   background-position: center;
@@ -15,13 +18,18 @@
 }
 
 #score, #timer{
-  float: right;
-  width: 50px;
-  height: 25px;
+  position: absolute;
+  top: 10px;
   font-size: 25px;
   font-family: "Comic Sans MS", sans-serif;
 }
-#timer{ float: left; }
+#timer{ 
+  left: 10px; 
+}
+
+#score {
+  right: 10px;
+}
 #score:before{ content:"Score:";}
 
 #wrapper {
@@ -29,6 +37,8 @@
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
+  overflow: hidden;
+  height: 60vh;
 }
 
 #restartBtn{
@@ -75,4 +85,13 @@ html {
   text-shadow: 1px 1px 6px #000;
   height: 100%;
   background: linear-gradient(to bottom, #627d4d 0%, #1f3b08 100%);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 5vw;
+  text-align: center;
 }
