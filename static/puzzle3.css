@@ -462,11 +462,4 @@ body {
   border-radius: 6px;
 }
 
-@media (max-width: 600px) {
-  .container {
-    transform: scale(1.4) translateY(-35px);
-    transform-origin: center;
-  }
-}
-
 

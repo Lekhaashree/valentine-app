@@ -33,8 +33,7 @@ document.body.addEventListener("touchstart", function initAudio() {
     document.body.removeEventListener("touchstart", initAudio);
 }, { once: true });
 
-
-$(".mole").on("click touchstart", function () {
+function targetHit(e){
   if (gameOver) return;
   var audio = document.getElementById("clickSound");
   if (audio) {
@@ -45,7 +44,13 @@ $(".mole").on("click touchstart", function () {
   }
   $(".mole").css("opacity", 0);
   $("#score").html(++hits);
-});
+
+  e.preventDefault(); //prevents the click from also firing
+}
+
+$(".mole").on("touchstart", targetHit);
+$(".mole").on("click", targetHit);
+
 
 $("button").click(function () {
   count = 30;
